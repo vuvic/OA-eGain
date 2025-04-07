@@ -15,16 +15,12 @@ def get_tracking_number(): # prompt user for tracking number and verify user inp
     return tracking_number
 
 def check_status(tracking_number): # retrieves delivery status for the given tracking number
-    try:
-        print("Let me check the status of your package...")
+    print("Let me check the status of your package...")
 
-        time.sleep(3) # Simulate the process of checking the status
-        status = package_status.get(int(tracking_number), "Not Found")
-        if status == "Not Found":
-            raise ValueError()
-        return status
-    except ValueError as e:
-        return None
+    time.sleep(3) # Simulate the process of checking the status
+    status = package_status.get(int(tracking_number), "Not Found")
+    return status
+
 
 def get_delivery_duration(tracking_number): # generate fake delivery duration to simulate a real order in transit
     random_days = random.randint(1, 14)
