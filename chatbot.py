@@ -33,7 +33,7 @@ def confirm_delivery(): # confirm that the customer received the package and con
     elif lost_check == "yes":
         print("Great! I'm happy to hear that your package has been delivered.\n")
     else: 
-        confirm_delivery()
+        confirm_delivery() # loop until user provides valid response
 
 def chatbot():
     tracking_number = get_tracking_number() 
