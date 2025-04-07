@@ -2,7 +2,7 @@ import random
 import time
 
 class PackageStatusError(Exception):
-    # exception raised when a package status is not found
+    """Exception raised when a package status is not found."""
     pass
 
 package_status = { # a dictionary with simulated tracking numbers as the key and a string indicating the status as the value
@@ -11,7 +11,8 @@ package_status = { # a dictionary with simulated tracking numbers as the key and
     11111: "Delivered"
 }
 
-def get_tracking_number():  # prompt user for tracking number and verify user input
+def get_tracking_number():  
+    """Prompt user for tracking number and verify user input."""
     while True:
         tracking_number = input("To track your package delivery status here, please enter your order tracking number: \n")
 
@@ -24,6 +25,7 @@ def get_tracking_number():  # prompt user for tracking number and verify user in
             print(f"{e}") # user is prompted again
 
 def check_status(tracking_number):
+    """Check the delivery status of the package with the provided tracking number."""
     print("Let me check the status of your package...\n")
     time.sleep(3)  # simulate the process of checking the status
     status = package_status.get(int(tracking_number), None)
@@ -36,7 +38,8 @@ def get_delivery_duration(tracking_number): # generate fake delivery duration to
     random_days = random.randint(1, 14)
     return random_days
 
-def confirm_delivery(): # ensures that users received their package; otherwise, connects them to a representative (not really)
+def confirm_delivery(): 
+    """Ensures that users received their package; otherwise, connects them to a representative (not really)."""
     while True:
         try:
             lost_check = input("Did you receive your package? (Yes/No): \n").strip().lower()
@@ -53,6 +56,7 @@ def confirm_delivery(): # ensures that users received their package; otherwise, 
 
 
 def chatbot():
+    """Facilitates the I/O of the chatbot. Calls itself recursively upon receiving a PackageStatusError."""
     try:
         tracking_number = get_tracking_number() 
         status = check_status(tracking_number)
