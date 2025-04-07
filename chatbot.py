@@ -7,12 +7,14 @@ package_status = { # a dictionary with simulated tracking numbers as the key and
     11111: "Delivered"
 }
 
-def check_valid_tracking_number(tracking_number):
+def get_tracking_number(): # prompt user for tracking number and verify user input
+    tracking_number = input("To track your package delivery status here, please enter your order tracking number: \n") 
+
     while (not tracking_number.isdigit()): # checks that the user inputted a valid tracking number (assuming that tracking numbers have no set length and contain only numerals)
         tracking_number = input("Invalid tracking number, please try again: \n")
     return tracking_number
 
-def check_status(tracking_number):
+def check_status(tracking_number): # retrieves delivery status for the given tracking number
     try:
         print("Let me check the status of your package...")
 
@@ -24,8 +26,7 @@ def check_status(tracking_number):
     except ValueError as e:
         return None
 
-def get_delivery_duration(tracking_number): 
-    # generate fake delivery duration to simulate a real order in transit
+def get_delivery_duration(tracking_number): # generate fake delivery duration to simulate a real order in transit
     random_days = random.randint(1, 14)
     return random_days
 
@@ -39,11 +40,8 @@ def confirm_delivery(): # confirm that the customer received the package and con
         confirm_delivery()
 
 def chatbot():
-
-    tracking_number = input("To track your package delivery status here, please enter your order tracking number: \n") # prompt user for tracking number
-    tracking_number = check_valid_tracking_number(tracking_number) # ensures that tracking number is valid
-    status = check_status(tracking_number) # retrieves delivery status for the given tracking number
-
+    tracking_number = get_tracking_number() 
+    status = check_status(tracking_number) 
 
     if status == "In Transit":
         remaining_duration = get_delivery_duration(tracking_number)
