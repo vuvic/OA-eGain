@@ -69,8 +69,6 @@ def chatbot():
         elif status == "Delivered":
             print("Your package has been marked as delivered.\n")
             confirm_delivery()
-        else:
-            print("a")
 
     except PackageStatusError as e:
         print(f"{e}")
