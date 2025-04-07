@@ -1,6 +1,9 @@
 import random
 import time
 
+class PackageStatusError(Exception):
+    # exception raised when a package status is not found
+    pass
 
 package_status = { # a dictionary with simulated tracking numbers as the key and a string indicating the status as the value
     12345: "In Transit",
@@ -26,7 +29,7 @@ def check_status(tracking_number):
     status = package_status.get(int(tracking_number), None)
     
     if status is None:
-        raise KeyError("Tracking number not found in the system.\n")
+        raise PackageStatusError("Tracking number not found in the system.\n")
     return status
 
 def get_delivery_duration(tracking_number): # generate fake delivery duration to simulate a real order in transit
@@ -65,7 +68,7 @@ def chatbot():
         else:
             print("a")
 
-    except KeyError as e:
+    except PackageStatusError as e:
         print(f"{e}")
         print("Please try again with a valid tracking number.\n")
         chatbot()  # Restart the process to allow the user to input a valid number
